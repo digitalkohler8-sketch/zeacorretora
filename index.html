@@ -25,6 +25,7 @@
             --color-bg-light: #f8fafc;
             --color-whatsapp: #25D366;
             --color-whatsapp-hover: #128C7E;
+            --color-gray-200: #e2e8f0;
             
             --font-body: 'Inter', sans-serif;
             --font-heading: 'Outfit', sans-serif;
@@ -955,6 +956,55 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Dental Plans & Logos */
+        .dental-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .dental-card {
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            border: 1px solid var(--color-gray-200);
+        }
+
+        .dental-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--color-secondary);
+        }
+
+        .dental-img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: var(--radius-md);
+        }
+
+        .footer-logo-img {
+            width: 140px;
+            height: auto;
+            border-radius: 50%;
+            background-color: var(--color-white);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
+        }
+
+        .header-logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--color-white);
+        }
         
         /* Mobile Adjustments */
         @media (max-width: 768px) {
@@ -986,8 +1036,8 @@
     <header class="header" id="header">
         <div class="container header-content">
             <!-- INSERIR LOGO AQUI: substituir pelo arquivo PNG/SVG enviado pelo cliente -->
-            <a href="#" class="logo-placeholder">
-                <div class="logo-circle">ZEA</div>
+            <a href="#" class="logo-placeholder" style="gap: 0.75rem;">
+                <img src="assets/zea_corretora_logo.png" alt="Zea Corretora" class="header-logo-img">
                 <div class="logo-text">
                     <span class="logo-text-title">Zea Corretora</span>
                     <span class="logo-text-sub">Seguros e Planos de Saúde</span>
@@ -1310,6 +1360,34 @@
         </div>
     </section>
 
+    <!-- Dental Plans Section -->
+    <section class="section dental-plans" style="background-color: var(--color-bg-light);">
+        <div class="container reveal">
+            <div class="text-center" style="margin-bottom: 3rem;">
+                <h2>Planos Odontológicos — Escolha o melhor para você</h2>
+                <p style="color: var(--color-text-light); font-size: 1.125rem;">Representamos as melhores operadoras do mercado. Fale conosco e contrate hoje.</p>
+            </div>
+            
+            <div class="dental-grid">
+                <div class="dental-card">
+                    <img src="assets/bradesco_dental_ideal_doc.png" alt="Bradesco Dental Ideal DOC" class="dental-img">
+                </div>
+                <div class="dental-card">
+                    <img src="assets/sulamerica_odonto_mais_doc.png" alt="SulAmérica Odonto Mais DOC" class="dental-img">
+                </div>
+                <div class="dental-card">
+                    <img src="assets/amil_dental_planos.png" alt="Amil Dental" class="dental-img">
+                </div>
+            </div>
+            
+            <div class="text-center" style="margin-top: 3rem;">
+                <a href="https://wa.me/5511953565517?text=Olá!%20Quero%20contratar%20meu%20plano%20odontológico" class="btn btn-whatsapp" style="font-size: 1.25rem; padding: 1.25rem 2.5rem; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);" target="_blank">
+                    QUERO CONTRATAR MEU PLANO
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Final CTA -->
     <section class="final-cta">
         <div class="container reveal">
@@ -1337,12 +1415,8 @@
             <div class="footer-grid">
                 <div class="footer-logo">
                     <!-- INSERIR LOGO AQUI: substituir pelo arquivo PNG/SVG enviado pelo cliente -->
-                    <div class="logo-placeholder" style="margin-bottom: 1.5rem;">
-                        <div class="logo-circle">ZEA</div>
-                        <div class="logo-text">
-                            <span class="logo-text-title">Zea Corretora</span>
-                            <span class="logo-text-sub">Seguros e Planos de Saúde</span>
-                        </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <img src="assets/zea_corretora_logo.png" alt="Zea Corretora" class="footer-logo-img">
                     </div>
                     <p style="opacity: 0.8; font-size: 0.875rem;">Sua saúde e de sua família em boas mãos. Atendimento especializado e humanizado.</p>
                 </div>
