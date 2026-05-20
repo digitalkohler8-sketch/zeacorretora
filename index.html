@@ -1028,6 +1028,270 @@
                 width: 100%;
             }
         }
+
+        /* ===== Plan Comparison Results ===== */
+        .plan-results-container {
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .plan-results-summary {
+            background: linear-gradient(135deg, var(--color-primary), #1a3c75);
+            color: var(--color-white);
+            padding: 2rem 2.5rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .plan-results-summary h3 {
+            color: var(--color-white);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-details {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .summary-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .summary-item i {
+            font-size: 1.25rem;
+            color: var(--color-secondary);
+        }
+
+        .plan-filters {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+            padding: 1.25rem 1.5rem;
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--color-gray-200);
+            align-items: center;
+        }
+
+        .plan-filter-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .plan-filters label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--color-primary);
+            white-space: nowrap;
+        }
+
+        .plan-filters select {
+            padding: 0.5rem 0.75rem;
+            border: 2px solid var(--color-gray-200);
+            border-radius: var(--radius-md);
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            outline: none;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--color-white);
+            color: var(--color-text);
+        }
+
+        .plan-filters select:focus {
+            border-color: var(--color-secondary);
+        }
+
+        .plan-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .plan-card {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-gray-200);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--color-secondary);
+        }
+
+        .plan-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem 1.5rem;
+            background: var(--color-bg-light);
+            border-bottom: 1px solid var(--color-gray-200);
+        }
+
+        .plan-card-logo-circle {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white);
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .plan-card-operator {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            color: var(--color-primary);
+            font-size: 0.95rem;
+            line-height: 1.2;
+        }
+
+        .plan-card-name {
+            font-size: 0.8rem;
+            color: var(--color-text-light);
+            margin-top: 0.15rem;
+        }
+
+        .plan-card-body {
+            padding: 1.25rem 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .plan-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .plan-tag {
+            display: inline-block;
+            padding: 0.2rem 0.65rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: rgba(26, 172, 176, 0.1);
+            color: var(--color-secondary);
+            border: 1px solid rgba(26, 172, 176, 0.2);
+        }
+
+        .plan-tag.copart-sim {
+            background: rgba(255, 171, 0, 0.1);
+            color: #d97706;
+            border-color: rgba(255, 171, 0, 0.25);
+        }
+
+        .plan-tag.copart-nao {
+            background: rgba(37, 211, 102, 0.1);
+            color: #16a34a;
+            border-color: rgba(37, 211, 102, 0.25);
+        }
+
+        .plan-card-price {
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid var(--color-gray-200);
+        }
+
+        .price-label {
+            font-size: 0.8rem;
+            color: var(--color-text-light);
+            margin-bottom: 0.25rem;
+        }
+
+        .price-value {
+            font-family: var(--font-heading);
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--color-primary);
+        }
+
+        .price-value small {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--color-text-light);
+        }
+
+        .plan-card-cta {
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .plan-card-cta .btn {
+            width: 100%;
+            font-size: 0.9rem;
+            padding: 0.75rem 1rem;
+        }
+
+        .plan-results-footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--color-gray-200);
+        }
+
+        .plan-results-footer .disclaimer {
+            color: var(--color-text-light);
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .plan-no-results {
+            text-align: center;
+            padding: 3rem;
+            color: var(--color-text-light);
+            font-size: 1.125rem;
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .plan-cards-grid {
+                grid-template-columns: 1fr;
+            }
+            .plan-filters {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+            }
+            .plan-filter-group {
+                justify-content: space-between;
+            }
+            .summary-details {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1080,7 +1344,7 @@
                 <p>Sem cadastro. Resultado na hora.</p>
             </div>
 
-            <div class="simulator-card reveal">
+            <div class="simulator-card reveal" id="sim-form-card">
                 <div id="sim-form">
                     <!-- Step 1: Tipo de Contratação -->
                     <div class="sim-step" id="step1">
@@ -1211,33 +1475,14 @@
 
                     <div class="sim-actions">
                         <button class="btn btn-secondary" style="width: 100%;" onclick="calculateResult()">
-                            Ver Estimativa <i class="ph-bold ph-arrow-right"></i>
+                            <i class="ph-bold ph-magnifying-glass"></i> Simular Agora
                         </button>
                     </div>
                 </div>
-
-                <!-- Result Card -->
-                <div id="sim-result" class="result-card">
-                    <div class="result-highlight">
-                        <h3>Aqui está sua estimativa preliminar, <span id="res-name"></span></h3>
-                        <p>Total de pessoas: <strong id="res-people"></strong></p>
-                        <div class="result-price">
-                            <span>Planos a partir de</span>
-                            R$ <span id="res-value">0</span><span style="font-size: 1rem; font-weight: normal;">/mês</span>
-                        </div>
-                        <div class="result-economy">
-                            <i class="ph-fill ph-trend-down"></i> Você pode economizar até 40% vs. planos comuns
-                        </div>
-                    </div>
-                    <p style="font-size: 1.125rem; margin-bottom: 1.5rem;">Quer ver as opções exatas e as redes credenciadas para o seu perfil?</p>
-                    <a href="#" id="res-whatsapp-btn" class="btn btn-whatsapp" style="font-size: 1.25rem; padding: 1.25rem 2rem;" target="_blank">
-                        💬 FALAR COM CONSULTOR NO WHATSAPP
-                    </a>
-                    <div style="margin-top: 1.5rem;">
-                        <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.875rem;" onclick="resetSim()">Refazer simulação</button>
-                    </div>
-                </div>
             </div>
+
+            <!-- Tabela Comparativa de Planos (populado dinamicamente pelo JS) -->
+            <div id="sim-result" class="plan-results-container" style="display: none;"></div>
         </div>
     </section>
 
@@ -1484,183 +1729,245 @@
         reveal(); // Disparar ao carregar a página
 
         // =============================================
-        // SIMULADOR DE PLANOS DE SAÚDE
+        // SIMULADOR DE PLANOS DE SAÚDE — TABELA COMPARATIVA
         // =============================================
 
-        // Estado do simulador — armazena as seleções do usuário
+        // Estado do simulador
         let simData = {
-            type: 'fisica',       // 'fisica' ou 'juridica'
-            coverage: 'saude',    // 'saude', 'ambos' ou 'odonto'
-            ages: {
-                age1: 0,  // 0 a 18 anos
-                age2: 0,  // 19 a 23 anos
-                age3: 0,  // 24 a 28 anos
-                age4: 0,  // 29 a 33 anos
-                age5: 0,  // 34 a 38 anos
-                age6: 0,  // 39 a 43 anos
-                age7: 0,  // 44 a 48 anos
-                age8: 0,  // 49 a 53 anos
-                age9: 0,  // 54 a 58 anos
-                age10: 0  // 59 anos ou +
-            }
+            type: 'fisica',
+            coverage: 'saude',
+            ages: { age1:0, age2:0, age3:0, age4:0, age5:0, age6:0, age7:0, age8:0, age9:0, age10:0 }
         };
 
-        // Tabela de preços base por faixa etária (referência ANS — SP)
-        // Plano saúde individual, cobertura básica ambulatorial
-        const priceTable = {
-            age1: 180,   // 0 a 18 anos
-            age2: 190,   // 19 a 23 anos
-            age3: 210,   // 24 a 28 anos
-            age4: 240,   // 29 a 33 anos
-            age5: 280,   // 34 a 38 anos
-            age6: 330,   // 39 a 43 anos
-            age7: 400,   // 44 a 48 anos
-            age8: 490,   // 49 a 53 anos
-            age9: 600,   // 54 a 58 anos
-            age10: 720   // 59 anos ou +
+        // Tabelas de preço por faixa etária — 3 níveis (referência de mercado SP 2025)
+        const PRICE_TABLES = {
+            baixo: { age1:120, age2:130, age3:145, age4:160, age5:185, age6:230, age7:300, age8:390, age9:490, age10:620 },
+            medio: { age1:220, age2:240, age3:260, age4:280, age5:320, age6:390, age7:510, age8:660, age9:820, age10:1050 },
+            alto:  { age1:380, age2:400, age3:430, age4:470, age5:520, age6:620, age7:790, age8:990, age9:1190, age10:1580 }
         };
 
-        // Valor fixo por pessoa para plano "Só Odontológico"
-        const ODONTO_VALOR_POR_PESSOA = 45;
+        const ODONTO_POR_PESSOA = 45;
+        const ODONTO_ADICIONAL = 35;
+        const DESCONTO_CNPJ = 0.15;
 
-        // Valor adicional por pessoa quando cobertura é "Saúde + Odonto"
-        const ODONTO_ADICIONAL_POR_PESSOA = 35;
+        // Cores das operadoras
+        const OP_COLORS = {
+            'Bradesco Saúde':'#cc2229','SulAmérica':'#003b71','Amil':'#00a651',
+            'Notre Dame Intermédica':'#e87722','Porto Seguro':'#003f87',
+            'Hapvida':'#00a86b','Unimed':'#00995d'
+        };
 
-        // Desconto aplicado quando contratação é via CNPJ (MEI/Empresa)
-        const DESCONTO_CNPJ = 0.15; // 15%
+        // Banco de planos
+        const PLANS_DB = [
+            { id:1, op:'Bradesco Saúde', plan:'Efetivo Nacional', type:'hospitalar_obs', typeLabel:'Hosp. + Obstetrícia', cov:'Nacional', copart:false, tier:'alto' },
+            { id:2, op:'Bradesco Saúde', plan:'Ação Saúde', type:'ambulatorial', typeLabel:'Ambulatorial', cov:'Regional', copart:true, tier:'baixo' },
+            { id:3, op:'SulAmérica', plan:'Especial 100', type:'hospitalar_obs', typeLabel:'Hosp. + Obstetrícia', cov:'Nacional', copart:false, tier:'alto' },
+            { id:4, op:'SulAmérica', plan:'Clássico', type:'hospitalar', typeLabel:'Hospitalar', cov:'Regional', copart:true, tier:'medio' },
+            { id:5, op:'Amil', plan:'S450 Nacional', type:'hospitalar_obs', typeLabel:'Hosp. + Obstetrícia', cov:'Nacional', copart:false, tier:'alto' },
+            { id:6, op:'Amil', plan:'S350 Regional', type:'hospitalar', typeLabel:'Hospitalar', cov:'Regional', copart:true, tier:'medio' },
+            { id:7, op:'Notre Dame Intermédica', plan:'Smart 200', type:'hospitalar', typeLabel:'Hospitalar', cov:'Regional', copart:true, tier:'baixo' },
+            { id:8, op:'Porto Seguro', plan:'Prata', type:'hospitalar', typeLabel:'Hospitalar', cov:'Regional', copart:true, tier:'medio' },
+            { id:9, op:'Porto Seguro', plan:'Ouro', type:'hospitalar_obs', typeLabel:'Hosp. + Obstetrícia', cov:'Nacional', copart:false, tier:'alto' },
+            { id:10, op:'Hapvida', plan:'Pleno', type:'ambulatorial', typeLabel:'Amb. + Hospitalar', cov:'Regional', copart:true, tier:'baixo' },
+            { id:11, op:'Unimed', plan:'Unipart Regional', type:'hospitalar', typeLabel:'Hospitalar', cov:'Regional', copart:true, tier:'medio' },
+            { id:12, op:'Unimed', plan:'Uniflex Nacional', type:'hospitalar_obs', typeLabel:'Hosp. + Obstetrícia', cov:'Nacional', copart:false, tier:'alto' }
+        ];
 
         // =============================================
-        // Seleção do tipo de contratação
+        // Funções auxiliares
         // =============================================
         function selectType(type) {
             simData.type = type;
-            // Remove a classe 'active' de todos os botões de tipo
             document.querySelectorAll('[data-type]').forEach(el => el.classList.remove('active'));
-            // Adiciona 'active' ao botão selecionado
             document.querySelector(`[data-type="${type}"]`).classList.add('active');
         }
 
-        // =============================================
-        // Seleção do tipo de cobertura
-        // =============================================
         function selectCoverage(coverage) {
             simData.coverage = coverage;
-            // Remove a classe 'active' de todos os botões de cobertura
             document.querySelectorAll('[data-coverage]').forEach(el => el.classList.remove('active'));
-            // Adiciona 'active' ao botão selecionado
             document.querySelector(`[data-coverage="${coverage}"]`).classList.add('active');
         }
 
-        // =============================================
-        // Atualiza a quantidade de pessoas por faixa etária
-        // =============================================
         function updateAge(ageKey, change) {
-            let newVal = simData.ages[ageKey] + change;
-            // Limita entre 0 e 20 pessoas por faixa
-            if (newVal >= 0 && newVal <= 20) {
-                simData.ages[ageKey] = newVal;
-                document.getElementById(`val-${ageKey}`).innerText = newVal;
+            let v = simData.ages[ageKey] + change;
+            if (v >= 0 && v <= 20) {
+                simData.ages[ageKey] = v;
+                document.getElementById(`val-${ageKey}`).innerText = v;
             }
         }
 
+        function calcPlanPrice(plan) {
+            let total = 0, people = 0;
+            const t = PRICE_TABLES[plan.tier];
+            for (let k in simData.ages) { people += simData.ages[k]; total += simData.ages[k] * t[k]; }
+            if (simData.coverage === 'odonto') { return people * ODONTO_POR_PESSOA; }
+            if (simData.coverage === 'ambos') { total += people * ODONTO_ADICIONAL; }
+            if (simData.type === 'juridica') { total *= (1 - DESCONTO_CNPJ); }
+            return Math.round(total * 100) / 100;
+        }
+
+        function fmtBRL(v) {
+            return v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function getInit(name) {
+            return name.split(' ').map(w => w[0]).filter(c => c === c.toUpperCase()).slice(0, 2).join('');
+        }
+
+        function renderCard(p, price, totalP) {
+            const color = OP_COLORS[p.op] || '#0D2B5E';
+            const copartLbl = p.copart ? 'Com coparticipação' : 'Sem coparticipação';
+            const copartCls = p.copart ? 'copart-sim' : 'copart-nao';
+            const wpp = encodeURIComponent(`Olá! Tenho interesse no plano ${p.plan} da ${p.op}. Pode me enviar mais detalhes?`);
+            return `
+            <div class="plan-card" data-type="${p.type}" data-copart="${p.copart}" data-price="${price}">
+                <div class="plan-card-header">
+                    <div class="plan-card-logo-circle" style="background:${color};">${getInit(p.op)}</div>
+                    <div>
+                        <div class="plan-card-operator">${p.op}</div>
+                        <div class="plan-card-name">${p.plan}</div>
+                    </div>
+                </div>
+                <div class="plan-card-body">
+                    <div class="plan-tags">
+                        <span class="plan-tag">${p.typeLabel}</span>
+                        <span class="plan-tag">${p.cov}</span>
+                        <span class="plan-tag ${copartCls}">${copartLbl}</span>
+                    </div>
+                    <div class="plan-card-price">
+                        <div class="price-label">Estimativa mensal para ${totalP} pessoa${totalP > 1 ? 's' : ''}</div>
+                        <div class="price-value">R$ ${fmtBRL(price)}<small>/mês</small></div>
+                    </div>
+                </div>
+                <div class="plan-card-cta">
+                    <a href="https://wa.me/5511953565517?text=${wpp}" class="btn btn-whatsapp" target="_blank">
+                        <i class="ph-fill ph-whatsapp-logo"></i> Quero esse plano
+                    </a>
+                </div>
+            </div>`;
+        }
+
         // =============================================
-        // Calcula o resultado da simulação
+        // Calcula e exibe tabela comparativa
         // =============================================
         function calculateResult() {
-            let totalPeople = 0;
-            let totalValue = 0;
+            let totalP = 0;
+            for (let k in simData.ages) totalP += simData.ages[k];
+            if (totalP === 0) { alert("Adicione ao menos 1 pessoa para simular."); return; }
 
-            // 1. Somar total de pessoas e calcular valor base pela tabela de saúde
-            for (let key in simData.ages) {
-                totalPeople += simData.ages[key];
-                totalValue += simData.ages[key] * priceTable[key];
-            }
+            const nameVal = document.getElementById('sim-name').value.trim();
+            const displayName = nameVal || 'amigo(a)';
+            const typeLbl = simData.type === 'fisica' ? 'Pessoa Física' : 'CNPJ (Empresarial)';
+            const covLbl = simData.coverage === 'saude' ? 'Só Saúde' : (simData.coverage === 'ambos' ? 'Saúde + Odonto' : 'Só Odontológico');
 
-            // 2. Validação: pelo menos 1 pessoa deve ser adicionada
-            if (totalPeople === 0) {
-                alert("Adicione ao menos 1 pessoa para simular.");
-                return;
-            }
+            const plans = PLANS_DB.map(p => ({ ...p, price: calcPlanPrice(p) })).sort((a, b) => a.price - b.price);
 
-            // 3. Aplicar regras de negócio conforme cobertura selecionada
-            if (simData.coverage === 'odonto') {
-                // "Só Odontológico": valor fixo de R$ 45 por pessoa (ignora tabela de saúde)
-                totalValue = totalPeople * ODONTO_VALOR_POR_PESSOA;
-            } else {
-                // "Saúde + Odonto": acrescenta R$ 35 por pessoa ao valor base de saúde
-                if (simData.coverage === 'ambos') {
-                    totalValue += totalPeople * ODONTO_ADICIONAL_POR_PESSOA;
-                }
+            const rc = document.getElementById('sim-result');
+            const wppGeneral = encodeURIComponent(`Olá!${nameVal ? ' Me chamo ' + nameVal + '.' : ''} Somos ${totalP} pessoa(s) e quero ver opções de planos de saúde.`);
 
-                // Contratação via CNPJ (MEI/Empresa): aplica desconto de 15% no total
-                if (simData.type === 'juridica') {
-                    totalValue = totalValue * (1 - DESCONTO_CNPJ);
-                }
-            }
+            rc.innerHTML = `
+            <div class="plan-results-summary">
+                <h3>Resultado da sua simulação, ${displayName}</h3>
+                <div class="summary-details">
+                    <div class="summary-item"><i class="ph-fill ph-users"></i> ${totalP} pessoa${totalP > 1 ? 's' : ''}</div>
+                    <div class="summary-item"><i class="ph-fill ph-buildings"></i> ${typeLbl}</div>
+                    <div class="summary-item"><i class="ph-fill ph-heartbeat"></i> ${covLbl}</div>
+                </div>
+            </div>
+            <div class="plan-filters">
+                <div class="plan-filter-group">
+                    <label>Ordenar por:</label>
+                    <select id="filter-sort" onchange="applyFilters()">
+                        <option value="price-asc">Menor Preço</option>
+                        <option value="price-desc">Maior Cobertura</option>
+                    </select>
+                </div>
+                <div class="plan-filter-group">
+                    <label>Coparticipação:</label>
+                    <select id="filter-copart" onchange="applyFilters()">
+                        <option value="todos">Todos</option>
+                        <option value="com">Com Coparticipação</option>
+                        <option value="sem">Sem Coparticipação</option>
+                    </select>
+                </div>
+                <div class="plan-filter-group">
+                    <label>Tipo:</label>
+                    <select id="filter-type" onchange="applyFilters()">
+                        <option value="todos">Todos</option>
+                        <option value="ambulatorial">Ambulatorial</option>
+                        <option value="hospitalar">Hospitalar</option>
+                        <option value="hospitalar_obs">Hosp. + Obstetrícia</option>
+                    </select>
+                </div>
+            </div>
+            <div id="plan-cards-container" class="plan-cards-grid">
+                ${plans.map(p => renderCard(p, p.price, totalP)).join('')}
+            </div>
+            <div id="plan-no-results" class="plan-no-results" style="display:none;">
+                <i class="ph ph-magnifying-glass" style="font-size:2rem;"></i>
+                <p>Nenhum plano encontrado com os filtros selecionados.</p>
+            </div>
+            <div class="plan-results-footer">
+                <p class="disclaimer">⚠️ Estes valores são estimativas baseadas em referências de mercado. Entre em contato para uma cotação personalizada e oficial.</p>
+                <a href="https://wa.me/5511953565517?text=${wppGeneral}" class="btn btn-whatsapp" style="font-size:1.25rem;padding:1.25rem 2.5rem;" target="_blank">
+                    💬 FALAR COM CONSULTOR NO WHATSAPP
+                </a>
+                <div style="margin-top:1.5rem;">
+                    <button class="btn btn-outline" style="padding:0.75rem 1.5rem;" onclick="resetSim()">
+                        <i class="ph ph-arrow-counter-clockwise"></i> Refazer simulação
+                    </button>
+                </div>
+            </div>`;
 
-            // 4. Arredondar o valor para 2 casas decimais
-            totalValue = Math.round(totalValue * 100) / 100;
-
-            // 5. Formatar o valor para exibição no padrão brasileiro
-            const valorFormatado = totalValue.toLocaleString('pt-BR', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            });
-
-            // 6. Exibir nome do usuário (ou "amigo(a)" se não informou)
-            const nameInput = document.getElementById('sim-name').value.trim();
-            const displayName = nameInput ? nameInput : "amigo(a)";
-            document.getElementById('res-name').innerText = displayName;
-
-            // 7. Exibir total de pessoas
-            document.getElementById('res-people').innerText = totalPeople + (totalPeople === 1 ? " pessoa" : " pessoas");
-
-            // 8. Exibir valor estimado
-            document.getElementById('res-value').innerText = valorFormatado;
-
-            // 9. Montar mensagem dinâmica para o WhatsApp
-            // Inclui nome (se informado), total de pessoas e estimativa
-            let wppMsg;
-            if (nameInput) {
-                wppMsg = `Olá! Me chamo ${nameInput}, somos ${totalPeople} pessoa(s) e quero ver opções a partir de R$ ${valorFormatado}/mês`;
-            } else {
-                wppMsg = `Olá! Somos ${totalPeople} pessoa(s) e quero ver opções a partir de R$ ${valorFormatado}/mês`;
-            }
-
-            const encodedMsg = encodeURIComponent(wppMsg);
-            document.getElementById('res-whatsapp-btn').href = `https://wa.me/5511953565517?text=${encodedMsg}`;
-
-            // 10. Alternar visualização: esconder formulário, mostrar resultado
-            document.getElementById('sim-form').style.display = 'none';
-            document.getElementById('sim-result').classList.add('active');
+            document.getElementById('sim-form-card').style.display = 'none';
+            rc.style.display = 'block';
+            rc.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         // =============================================
-        // Resetar simulação — volta ao estado inicial
+        // Filtros da tabela de resultados
+        // =============================================
+        function applyFilters() {
+            const sv = document.getElementById('filter-sort').value;
+            const cv = document.getElementById('filter-copart').value;
+            const tv = document.getElementById('filter-type').value;
+            const cards = Array.from(document.querySelectorAll('.plan-card'));
+            let vis = 0;
+            cards.forEach(c => {
+                let show = true;
+                if (cv === 'com' && c.dataset.copart === 'false') show = false;
+                if (cv === 'sem' && c.dataset.copart === 'true') show = false;
+                if (tv !== 'todos' && c.dataset.type !== tv) show = false;
+                c.style.display = show ? '' : 'none';
+                if (show) vis++;
+            });
+            const container = document.getElementById('plan-cards-container');
+            cards.sort((a, b) => {
+                const pa = parseFloat(a.dataset.price), pb = parseFloat(b.dataset.price);
+                return sv === 'price-asc' ? pa - pb : pb - pa;
+            }).forEach(c => container.appendChild(c));
+            document.getElementById('plan-no-results').style.display = vis === 0 ? 'block' : 'none';
+        }
+
+        // =============================================
+        // Resetar simulação
         // =============================================
         function resetSim() {
-            // Zerar todos os contadores de idade
-            for (let key in simData.ages) {
-                simData.ages[key] = 0;
-                document.getElementById(`val-${key}`).innerText = '0';
+            for (let k in simData.ages) {
+                simData.ages[k] = 0;
+                document.getElementById(`val-${k}`).innerText = '0';
             }
-
-            // Resetar tipo de contratação para "Pessoa Física"
             simData.type = 'fisica';
             document.querySelectorAll('[data-type]').forEach(el => el.classList.remove('active'));
             document.querySelector('[data-type="fisica"]').classList.add('active');
-
-            // Resetar cobertura para "Só Saúde"
             simData.coverage = 'saude';
             document.querySelectorAll('[data-coverage]').forEach(el => el.classList.remove('active'));
             document.querySelector('[data-coverage="saude"]').classList.add('active');
-
-            // Limpar campo de nome
             document.getElementById('sim-name').value = '';
-
-            // Alternar visualização: mostrar formulário, esconder resultado
-            document.getElementById('sim-form').style.display = 'block';
-            document.getElementById('sim-result').classList.remove('active');
+            document.getElementById('sim-form-card').style.display = 'block';
+            document.getElementById('sim-result').style.display = 'none';
+            document.getElementById('sim-result').innerHTML = '';
+            document.getElementById('simulador').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     </script>
 </body>
