@@ -1848,105 +1848,202 @@
         }
 
         // =============================================
-        // Calcula e exibe tabela comparativa
+        // Exibe formulário de captura de lead
         // =============================================
         function calculateResult() {
             let totalP = 0;
             for (let k in simData.ages) totalP += simData.ages[k];
-            if (totalP === 0) { alert("Adicione ao menos 1 pessoa para simular."); return; }
+            if (totalP === 0) { alert('Adicione ao menos 1 pessoa para simular.'); return; }
 
             const nameVal = document.getElementById('sim-name').value.trim();
-            const displayName = nameVal || 'amigo(a)';
             const typeLbl = simData.type === 'fisica' ? 'Pessoa Física' : 'CNPJ (Empresarial)';
-            const covLbl = simData.coverage === 'saude' ? 'Só Saúde' : (simData.coverage === 'ambos' ? 'Saúde + Odonto' : 'Só Odontológico');
+            const covLbl = simData.coverage === 'saude' ? 'Só Saúde'
+                         : (simData.coverage === 'ambos' ? 'Saúde + Odonto' : 'Só Odontológico');
+            const resumo = totalP + ' pessoa(s) · ' + covLbl + ' · ' + typeLbl;
 
-            const plans = PLANS_DB.map(p => ({ ...p, price: calcPlanPrice(p) })).sort((a, b) => a.price - b.price);
+            // Monta o HTML com concatenação simples (evita erros de backtick aninhado)
+            var html = '<style>'
+                + '@keyframes slideUp{'
+                + 'from{opacity:0;transform:translateY(30px)}'
+                + 'to{opacity:1;transform:translateY(0)}}'
+                + '.lead-form-wrap{animation:slideUp .45s ease-out}'
+                + '.lead-field{margin-bottom:1.25rem}'
+                + '.lead-label{display:block;margin-bottom:.4rem;font-weight:600;color:var(--color-text)}'
+                + '.lead-input{width:100%;height:48px;padding:0 1rem;border:1.5px solid var(--color-gray-300);border-radius:var(--radius-md);font-size:1rem;font-family:inherit;background:#fff;transition:border-color .2s}'
+                + '.lead-input:focus{outline:none;border-color:var(--color-primary)}'
+                + '.lead-input[readonly]{background:#f3f4f6;color:var(--color-text-light);cursor:default}'
+                + '.lead-error{display:none;color:#ef4444;font-size:.82rem;margin-top:.25rem}'
+                + '.lead-divider{border:none;border-top:1px solid var(--color-gray-200);margin:1.5rem 0}'
+                + '</style>'
+                + '<div class="lead-form-wrap" style="max-width:600px;margin:0 auto;padding:1rem 0 2rem">'
+                +   '<div class="text-center" style="margin-bottom:2rem">'
+                +     '<h3 style="color:var(--color-primary);font-size:1.65rem;margin-bottom:.5rem">Quase lá! Veja as melhores opções para o seu perfil</h3>'
+                +     '<p style="color:var(--color-text-light)">Preencha abaixo — nossa especialista entra em contato em menos de 1 hora</p>'
+                +   '</div>'
+                +   '<div style="background:#fff;padding:2rem;border-radius:var(--radius-lg);box-shadow:var(--shadow-md);border:1px solid var(--color-gray-200)">'
 
-            const rc = document.getElementById('sim-result');
-            const wppGeneral = encodeURIComponent(`Olá!${nameVal ? ' Me chamo ' + nameVal + '.' : ''} Somos ${totalP} pessoa(s) e quero ver opções de planos de saúde.`);
+                // Campo 0: Resumo (readonly)
+                +     '<div class="lead-field">'
+                +       '<label class="lead-label">📋 Resumo da sua simulação</label>'
+                +       '<input class="lead-input" type="text" id="lead-resumo" readonly value="' + resumo + '">'
+                +     '</div>'
+                +     '<hr class="lead-divider">'
 
-            rc.innerHTML = `
-            <div class="plan-results-summary">
-                <h3>Resultado da sua simulação, ${displayName}</h3>
-                <div class="summary-details">
-                    <div class="summary-item"><i class="ph-fill ph-users"></i> ${totalP} pessoa${totalP > 1 ? 's' : ''}</div>
-                    <div class="summary-item"><i class="ph-fill ph-buildings"></i> ${typeLbl}</div>
-                    <div class="summary-item"><i class="ph-fill ph-heartbeat"></i> ${covLbl}</div>
-                </div>
-            </div>
-            <div class="plan-filters">
-                <div class="plan-filter-group">
-                    <label>Ordenar por:</label>
-                    <select id="filter-sort" onchange="applyFilters()">
-                        <option value="price-asc">Menor Preço</option>
-                        <option value="price-desc">Maior Cobertura</option>
-                    </select>
-                </div>
-                <div class="plan-filter-group">
-                    <label>Coparticipação:</label>
-                    <select id="filter-copart" onchange="applyFilters()">
-                        <option value="todos">Todos</option>
-                        <option value="com">Com Coparticipação</option>
-                        <option value="sem">Sem Coparticipação</option>
-                    </select>
-                </div>
-                <div class="plan-filter-group">
-                    <label>Tipo:</label>
-                    <select id="filter-type" onchange="applyFilters()">
-                        <option value="todos">Todos</option>
-                        <option value="ambulatorial">Ambulatorial</option>
-                        <option value="hospitalar">Hospitalar</option>
-                        <option value="hospitalar_obs">Hosp. + Obstetrícia</option>
-                    </select>
-                </div>
-            </div>
-            <div id="plan-cards-container" class="plan-cards-grid">
-                ${plans.map(p => renderCard(p, p.price, totalP)).join('')}
-            </div>
-            <div id="plan-no-results" class="plan-no-results" style="display:none;">
-                <i class="ph ph-magnifying-glass" style="font-size:2rem;"></i>
-                <p>Nenhum plano encontrado com os filtros selecionados.</p>
-            </div>
-            <div class="plan-results-footer">
-                <p class="disclaimer">⚠️ Estes valores são estimativas baseadas em referências de mercado. Entre em contato para uma cotação personalizada e oficial.</p>
-                <a href="https://wa.me/5511953565517?text=${wppGeneral}" class="btn btn-whatsapp" style="font-size:1.25rem;padding:1.25rem 2.5rem;" target="_blank">
-                    💬 FALAR COM CONSULTOR NO WHATSAPP
-                </a>
-                <div style="margin-top:1.5rem;">
-                    <button class="btn btn-outline" style="padding:0.75rem 1.5rem;" onclick="resetSim()">
-                        <i class="ph ph-arrow-counter-clockwise"></i> Refazer simulação
-                    </button>
-                </div>
-            </div>`;
+                // Campo 1: Nome
+                +     '<div class="lead-field">'
+                +       '<label class="lead-label">Nome completo *</label>'
+                +       '<input class="lead-input" type="text" id="lead-nome" placeholder="Digite seu nome completo">'
+                +       '<span class="lead-error" id="err-nome">Por favor, preencha seu nome completo.</span>'
+                +     '</div>'
+
+                // Campo 2: WhatsApp
+                +     '<div class="lead-field">'
+                +       '<label class="lead-label">WhatsApp *</label>'
+                +       '<input class="lead-input" type="text" id="lead-wpp" placeholder="(XX) XXXXX-XXXX" maxlength="15" oninput="maskWpp(this)">'
+                +       '<span class="lead-error" id="err-wpp">Informe um número de WhatsApp válido.</span>'
+                +     '</div>'
+
+                // Campo 3: Cidade
+                +     '<div class="lead-field">'
+                +       '<label class="lead-label">Cidade onde mora *</label>'
+                +       '<input class="lead-input" type="text" id="lead-cidade" placeholder="Ex: São Paulo – SP">'
+                +       '<span class="lead-error" id="err-cidade">Por favor, informe sua cidade.</span>'
+                +     '</div>'
+
+                // Campo 4: Tem plano?
+                +     '<div class="lead-field">'
+                +       '<label class="lead-label">Você já tem plano de saúde hoje? *</label>'
+                +       '<select class="lead-input" id="lead-plano">'
+                +         '<option value="">Selecione uma opção...</option>'
+                +         '<option>Sim, mas quero trocar ou reduzir o valor</option>'
+                +         '<option>Não, nunca tive plano</option>'
+                +         '<option>Tive, mas cancelei</option>'
+                +       '</select>'
+                +       '<span class="lead-error" id="err-plano">Selecione uma opção.</span>'
+                +     '</div>'
+
+                // Campo 5: Prioridade
+                +     '<div class="lead-field">'
+                +       '<label class="lead-label">Qual é a maior prioridade para você no plano? *</label>'
+                +       '<select class="lead-input" id="lead-prio">'
+                +         '<option value="">Selecione uma opção...</option>'
+                +         '<option>Pagar o menor valor possível</option>'
+                +         '<option>Ter a melhor rede de hospitais e médicos</option>'
+                +         '<option>Cobertura completa (consultas, exames e internação)</option>'
+                +         '<option>Atendimento rápido e sem burocracia</option>'
+                +       '</select>'
+                +       '<span class="lead-error" id="err-prio">Selecione uma opção.</span>'
+                +     '</div>'
+
+                // Campo 6: Prazo
+                +     '<div class="lead-field">'
+                +       '<label class="lead-label">Quando você pretende contratar? *</label>'
+                +       '<select class="lead-input" id="lead-prazo">'
+                +         '<option value="">Selecione uma opção...</option>'
+                +         '<option>O quanto antes, estou decidido(a)</option>'
+                +         '<option>Nos próximos 30 dias</option>'
+                +         '<option>Ainda estou pesquisando</option>'
+                +       '</select>'
+                +       '<span class="lead-error" id="err-prazo">Selecione uma opção.</span>'
+                +     '</div>'
+
+                // Botão enviar
+                +     '<div style="margin-top:2rem">'
+                +       '<button onclick="submitLead()" style="width:100%;padding:1.1rem;font-size:1.05rem;font-weight:700;background:var(--color-secondary);color:#fff;border:none;border-radius:var(--radius-md);cursor:pointer;transition:opacity .2s" onmouseover="this.style.opacity=\'.85\'" onmouseout="this.style.opacity=\'1\'">'
+                +         'QUERO MINHA COTAÇÃO GRATUITA'
+                +       '</button>'
+                +       '<p style="text-align:center;font-size:.82rem;color:var(--color-text-light);margin-top:.65rem">🔒 Sem spam. Sem compromisso. 100% gratuito.</p>'
+                +     '</div>'
+                +     '<div style="margin-top:1.25rem;text-align:center">'
+                +       '<button onclick="resetSim()" style="background:none;border:1.5px solid var(--color-gray-300);padding:.6rem 1.5rem;border-radius:var(--radius-md);cursor:pointer;color:var(--color-text-light);font-size:.9rem">'
+                +         '← Voltar ao simulador'
+                +       '</button>'
+                +     '</div>'
+                +   '</div>'
+                + '</div>';
+
+            var rc = document.getElementById('sim-result');
+            rc.innerHTML = html;
+
+            // Se o usuário já tinha preenchido o nome no simulador, aproveita
+            if (nameVal) { document.getElementById('lead-nome').value = nameVal; }
 
             document.getElementById('sim-form-card').style.display = 'none';
             rc.style.display = 'block';
             rc.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
-        // =============================================
-        // Filtros da tabela de resultados
-        // =============================================
-        function applyFilters() {
-            const sv = document.getElementById('filter-sort').value;
-            const cv = document.getElementById('filter-copart').value;
-            const tv = document.getElementById('filter-type').value;
-            const cards = Array.from(document.querySelectorAll('.plan-card'));
-            let vis = 0;
-            cards.forEach(c => {
-                let show = true;
-                if (cv === 'com' && c.dataset.copart === 'false') show = false;
-                if (cv === 'sem' && c.dataset.copart === 'true') show = false;
-                if (tv !== 'todos' && c.dataset.type !== tv) show = false;
-                c.style.display = show ? '' : 'none';
-                if (show) vis++;
+        // Máscara do WhatsApp em tempo real
+        function maskWpp(input) {
+            var v = input.value.replace(/\D/g, '');
+            if (v.length > 11) v = v.slice(0, 11);
+            if (v.length > 6) v = '(' + v.slice(0,2) + ') ' + v.slice(2,7) + '-' + v.slice(7);
+            else if (v.length > 2) v = '(' + v.slice(0,2) + ') ' + v.slice(2);
+            input.value = v;
+        }
+
+        // Valida e envia o lead para o WhatsApp
+        function submitLead() {
+            var ok = true;
+            // Mapa de campos e mensagens de erro
+            var fields = [
+                { id: 'lead-nome',   err: 'err-nome',   min: 2 },
+                { id: 'lead-wpp',    err: 'err-wpp',    min: 14 },
+                { id: 'lead-cidade', err: 'err-cidade', min: 2 },
+                { id: 'lead-plano',  err: 'err-plano',  min: 1 },
+                { id: 'lead-prio',   err: 'err-prio',   min: 1 },
+                { id: 'lead-prazo',  err: 'err-prazo',  min: 1 }
+            ];
+            var vals = {};
+            fields.forEach(function(f) {
+                var el  = document.getElementById(f.id);
+                var err = document.getElementById(f.err);
+                var v   = el.value.trim();
+                if (!v || v.length < f.min) {
+                    err.style.display = 'block';
+                    el.style.borderColor = '#ef4444';
+                    ok = false;
+                } else {
+                    err.style.display = 'none';
+                    el.style.borderColor = 'var(--color-gray-300)';
+                    vals[f.id] = v;
+                }
             });
-            const container = document.getElementById('plan-cards-container');
-            cards.sort((a, b) => {
-                const pa = parseFloat(a.dataset.price), pb = parseFloat(b.dataset.price);
-                return sv === 'price-asc' ? pa - pb : pb - pa;
-            }).forEach(c => container.appendChild(c));
-            document.getElementById('plan-no-results').style.display = vis === 0 ? 'block' : 'none';
+            if (!ok) return;
+
+            // Monta as faixas etárias (somente as que têm pessoas)
+            var ageLabels = {
+                age1:'0 a 18', age2:'19 a 23', age3:'24 a 28', age4:'29 a 33',
+                age5:'34 a 38', age6:'39 a 43', age7:'44 a 48',
+                age8:'49 a 53', age9:'54 a 58', age10:'59+'
+            };
+            var faixas = '';
+            for (var k in simData.ages) {
+                if (simData.ages[k] > 0) {
+                    faixas += '\n• ' + simData.ages[k] + ' pessoa(s) entre ' + ageLabels[k] + ' anos';
+                }
+            }
+
+            var tipo = simData.type === 'fisica' ? 'Sem CNPJ (Pessoa Física / Família)' : 'Com CNPJ (MEI / Empresa)';
+            var cob  = simData.coverage === 'saude' ? 'Só Saúde'
+                     : (simData.coverage === 'ambos' ? 'Saúde + Odonto' : 'Só Odontológico');
+
+            // Monta a mensagem no formato solicitado
+            var msg = 'Olá! Acabei de preencher o simulador no site da Zea Corretora.\n\n'
+                    + '📋 *Minha simulação:*\n'
+                    + '• Tipo de contratação: ' + tipo + '\n'
+                    + '• Cobertura desejada: ' + cob + '\n'
+                    + '• Pessoas por faixa etária:' + faixas + '\n\n'
+                    + '📝 *Minhas respostas:*\n'
+                    + '• Nome: '                + vals['lead-nome']   + '\n'
+                    + '• WhatsApp: '            + vals['lead-wpp']    + '\n'
+                    + '• Cidade: '              + vals['lead-cidade'] + '\n'
+                    + '• Tenho plano hoje: '    + vals['lead-plano']  + '\n'
+                    + '• Minha prioridade: '    + vals['lead-prio']   + '\n'
+                    + '• Prazo para contratar: '+ vals['lead-prazo']  + '\n\n'
+                    + 'Aguardo o contato. Obrigado(a)!';
+
+            window.open('https://wa.me/5511953565517?text=' + encodeURIComponent(msg), '_blank');
         }
 
         // =============================================
